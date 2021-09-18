@@ -20338,7 +20338,11 @@ var render = function() {
                       "router-link",
                       {
                         staticClass: "nav-link",
-                        attrs: { to: { name: "posts.index" } }
+                        attrs: {
+                          "active-class": "active-menu",
+                          exact: "",
+                          to: { name: "posts.index" }
+                        }
                       },
                       [_vm._v("Posts list")]
                     )
@@ -20354,7 +20358,11 @@ var render = function() {
                       "router-link",
                       {
                         staticClass: "nav-link",
-                        attrs: { to: { name: "posts.create" } }
+                        attrs: {
+                          "active-class": "active-menu",
+                          exact: "",
+                          to: { name: "posts.create" }
+                        }
                       },
                       [_vm._v("Add new post")]
                     )
