@@ -2,15 +2,15 @@
 
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class PostsSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      *
      * @return void
      */
     public function run()
     {
-        $this->call(PostsSeeder::class);
+        factory(\App\Post::class, 10)->create();
     }
 }
