@@ -1,5 +1,11 @@
 <template>
    <div>
+       <select v-model="category_id" class="form-control col-md-3">
+           <option value="">-- choose category --</option>
+           <option v-for="category in categories" :key="category.id" :value="category.id">
+                {{ category.name }}
+           </option>
+       </select>
        <table class="table">
         <thead>
             <tr>
@@ -33,17 +39,27 @@
         data() {
             return {
                 posts: {},
+                categories: {},
+                category_id: '',
             }
         },
 
         mounted() {
+            axios.get('/api/categories')
+				.then(response => {
+					this.categories = response.data.data;
+				});
             this.getResults();
+        },
+
+        watch: {
+            category_id(value) {this.getResults();}
         },
 
         methods: {
 		// Our method to GET results from a Laravel endpoint
 		getResults(page = 1) {
-			axios.get('/api/posts?page=' + page)
+			axios.get('/api/posts?page=' + page + '&category_id=' + this.category_id)
 				.then(response => {
 					this.posts = response.data;
 				});
