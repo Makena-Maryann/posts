@@ -30,6 +30,11 @@ class PostController extends Controller
 
     public function store(StorePostRequest $request)
     {
+        if ($request->hasFile('thumbnail')) {
+            $filename = $request->thumbnail->getClientOriginalName();
+            info($filename);   // Writing to a log, for example
+        }
+
         $post = Post::create($request->validated());
 
         return new PostResource($post);
