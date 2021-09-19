@@ -1929,6 +1929,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1937,7 +1946,8 @@ __webpack_require__.r(__webpack_exports__);
         title: '',
         post_text: '',
         category_id: ''
-      }
+      },
+      errors: {}
     };
   },
   mounted: function mounted() {
@@ -1953,6 +1963,10 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.post('/api/posts', this.fields).then(function (response) {
         _this2.$router.push('/');
+      })["catch"](function (error) {
+        if (error.response.status === 422) {
+          _this2.errors = error.response.data.errors;
+        }
       });
     }
   }
@@ -20503,6 +20517,14 @@ var render = function() {
           }
         }),
         _vm._v(" "),
+        _vm.errors && _vm.errors.title
+          ? _c("div", { staticClass: "alert alert-danger" }, [
+              _vm._v(
+                "\n            " + _vm._s(_vm.errors.title[0]) + "\n      "
+              )
+            ])
+          : _vm._e(),
+        _vm._v(" "),
         _c("br"),
         _vm._v("\n      Post text:\n      "),
         _c("br"),
@@ -20528,6 +20550,14 @@ var render = function() {
             }
           }
         }),
+        _vm._v(" "),
+        _vm.errors && _vm.errors.post_text
+          ? _c("div", { staticClass: "alert alert-danger" }, [
+              _vm._v(
+                "\n            " + _vm._s(_vm.errors.post_text[0]) + "\n      "
+              )
+            ])
+          : _vm._e(),
         _vm._v(" "),
         _c("br"),
         _vm._v("\n      Category:\n      "),
@@ -20570,6 +20600,16 @@ var render = function() {
           }),
           0
         ),
+        _vm._v(" "),
+        _vm.errors && _vm.errors.category_id
+          ? _c("div", { staticClass: "alert alert-danger" }, [
+              _vm._v(
+                "\n            " +
+                  _vm._s(_vm.errors.category_id[0]) +
+                  "\n      "
+              )
+            ])
+          : _vm._e(),
         _vm._v(" "),
         _c("br"),
         _vm._v(" "),
